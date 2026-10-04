@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+@theme {
+  --color-door: #1d4b3a;
+  --color-door-hover: #25604a;
+  --color-door-deep: #123126;
+  --color-blush: #f4cdd3;
+  --color-blush-deep: #e7a9b3;
+  --color-plaster: #f2f4f1;
+  --color-paper: #ffffff;
+  --color-ink: #16211c;
+  --color-muted: #5e6b64;
+  --color-line: #dadcd5;
+  --color-amber: #f2b84b;
+  --color-amber-soft: #fbe7bf;
+  --color-alert: #a4332a;
+  --color-alert-soft: #f7dcd8;
+
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Figtree Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 28px;
+  --radius-panel: 20px;
+}
+
+@layer base {
+  html { color-scheme: light; -webkit-text-size-adjust: 100%; }
+  body { background: var(--color-plaster); color: var(--color-ink); font-family: var(--font-sans); }
+  :focus-visible { outline: 3px solid var(--color-door); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: var(--color-blush); }
+  input, select, textarea, button { font: inherit; }
+}
+
+/* Étiquette « Dymo » : le motif de la marque (logo, noms sur la boîte aux lettres). */
+.tape {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-stretch: 75%;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #f7faf8;
+  background: var(--color-door-deep);
+  padding: 0.28em 0.7em 0.24em;
+  border-radius: 3px;
+  text-shadow: 0 1px 0 rgb(0 0 0 / 0.35), 0 -1px 0 rgb(255 255 255 / 0.12);
+  clip-path: polygon(0 8%, 2% 0, 98% 0, 100% 8%, 100% 92%, 98% 100%, 2% 100%, 0 92%);
+}
+.tape-blush { background: var(--color-blush-deep); color: var(--color-door-deep); text-shadow: 0 1px 0 rgb(255 255 255 / 0.4); }
+
+@keyframes slide-in-left { from { transform: translateX(-120%) rotate(-6deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes slide-in-right { from { transform: translateX(120%) rotate(6deg); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes rise { from { transform: translateY(12px); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes glow { 0%, 100% { box-shadow: 0 0 0 0 rgb(242 184 75 / 0); } 50% { box-shadow: 0 0 0 6px rgb(242 184 75 / 0.35); } }
+.anim-left { animation: slide-in-left 520ms cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.anim-right { animation: slide-in-right 520ms cubic-bezier(0.2, 0.8, 0.2, 1) 120ms both; }
+.anim-rise { animation: rise 420ms ease-out 380ms both; }
+.anim-glow { animation: glow 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}
